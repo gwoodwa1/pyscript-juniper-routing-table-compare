@@ -4,7 +4,7 @@ Web app to compare Juniper Routing tables without needing access to the platform
 This is purely a demonstration of what can be done with pyscript and is not intended
 for Production use but requires lots of aspects of using pyscript.
 
-This has only been used on very small routing table output included int the repo
+This has only been used on very small routing table output, sample routing table files in the output folder
 
 The pyscript CDN is used instead of local machine installation
 
