@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<style type="text/css" media="screen">
+*{box-sizing: border-box;
+}
+input[type=text], input[type=email], input[type=number], input[type=select], input[type=date],input[type=select],input[type=password], input[type=tel]
+{
+    width: 45%;
+    padding: 12px;
+    border: 1px solid rgb(168, 166, 166);
+    border-radius: 4px;
+    resize: vertical;
+}
+textarea{
+    width:45%;
+    padding: 12px;
+    border: 1px solid rgb(168, 166, 166);
+    border-radius: 4px;
+    resize: vertical;
+}
+input[type=radio],input[type=checkbox]{
+    width: 1%;
+    padding-left: 0%;
+    border: 1px solid rgb(168, 166, 166);
+    border-radius: 4px;
+    resize: vertical;
+}
+table, th, td {
+    border: 1px solid black;
+  }
+  table {
+    border-collapse: collapse;
+  }
+  table {
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #1f1d1d;color: white;
+  }
+h1{
+    font-family: Arial;
+    font-size: medium;
+    font-style: normal;
+    font-weight: bold;
+    color: brown;
+    text-align: center;
+    text-decoration: underline;
+}
+
+[type="file"] {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  white-space: nowrap;
+  width: 1px;
+}
+[type="file"] + label {
+  background-color: #6FC244;
+  border-radius: 4rem;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  padding-left: 50px;
+  width: 150px;
+}
+[type="file"]:focus + label,
+[type="file"] + label:hover {
+    background-color: #f15d22;
+}
+[type="file"]:focus + label {
+  outline: 1px dotted #000;
+}
+
+[type="file"]:focus + label,
+[type="file"] + label:hover {
+    background-color: #f15d22;
+}
+[type="file"]:focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float:left;
+}
+input[type=submit]:hover {
+background-color: #32a336;
+}
+.container{
+    border-radius: 5px;
+    background-color:#EDEDEC;
+    padding: 20px;
+}
+.col-10{
+    float: left;
+    width:10%;
+    margin-top: 6px;
+}
+.col-90{
+    float: left;
+    width: 90%;
+    margin-top: 6px;
+}
+.row:after{
+    content: "";
+    display: table;
+    clear: both;
+}
+@media screen and (max-width: 600px) {
+    .col-10,.col-90,input[type=submit]{
+        width: 100%;
+        margin-top: 0;
+    }
+}
+
+</style>
+    <head>
+        <meta charset="UTF-8">
+        <title>Juniper Routing Table Parsing Form</title>
+        <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">       
+    </head>
+       
+    <body>
+      <py-env> 
+        - pandas
+        - lxml
+    </py-env>
+    <py-script src="/static/junosroute.py">
+
+    </py-script>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-90">
+                <h2>Juniper Routing Table Comparison Form</h2>
+                    <label for="localfile">Select the file containing the <b>NETCONF</b> or <b>"show route | display xml"</b> output:</label>
+                    <p>
+                    <label for="localfile">Ensure <b>file1</b> begins <b>previous*.txt</b> and <b>file2</b> begins <b>current*.txt</b></label>
+                      <input type="file" id="outputfile1" />
+                      <label for="outputfile1" class="btn-3" >
+                      <span>File1: <b>Previous</b></span>
+                      </label>
+                      <input type="file" id="outputfile2" />
+                      <label for="outputfile2" class="btn-3">
+                      <span>File2: <b>Current</b></span>
+                      </label>
+                    </p>
+                </div>
+
+
+            </div>
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search routing table..">
+                <div id="output1"></div>
+                <div id="output2"></div>
+            </div>
+            </div>  
+        </div>
+
+<script>
+const myFunction = () => {
+  let txtValue, filter;
+  const input = document.getElementById("myInput");
+  const table = document.getElementById("output1");
+  filter = input.value.toUpperCase();
+  for (tr of table.getElementsByTagName("tr")) 
+    for(td of tr.getElementsByTagName("td"))
+        if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1){
+                tr.style.display = "";
+                break;
+            }
+            else 
+                tr.style.display = "none"; 
+        }   
+    }
+</script>
+</script>
+    </body>
+</html>
