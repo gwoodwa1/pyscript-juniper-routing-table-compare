@@ -22,9 +22,9 @@ The pyscript CDN is used instead of local machine installation
 
 1) Clone the repo
 
-2) To avoid using the need to host the file. Copy/Paste the python script into the HTML file within the <pyscript> tags
+2) To avoid using the need to host the file. Copy/Paste the python script into the HTML file within the "<pyscript>" tags
   
-3) Change in the HTML file from <py-script src="/static/junosroute.py"> to <pyscript> i.e. empty tag
+3) Change in the HTML file from <py-script src="/static/junosroute.py"> to "<pyscript>" i.e. empty tag
 
 **Using the app**
   
