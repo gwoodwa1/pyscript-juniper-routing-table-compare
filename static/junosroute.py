@@ -11,10 +11,8 @@ def clean_namespace(root: etree.Element) -> etree.Element:
     This take in a valid etree element and removes all namespaces
     from the XML tags. This just ensures that xpath queries do not
     need to reference the namespace as well.
-
     We re-assign the tag to the localname only and therefore remove any
     namespaces which previously exist.
-
     The final step is the cleanup_namespaces process to remove the
     namespace definitions from the tree
     """
@@ -129,13 +127,20 @@ async def upload_file(event) -> None:
                 }
             )
             struct_data = df.to_dict("records")
-            cols = [k for k in struct_data[0].keys()]
-            id = f"final differences"
-            outputdiv = construct_table(columns=cols, records=struct_data, id=id)
-            document.getElementById("output1").innerHTML = ""
-            document.getElementById("output2").innerHTML = ""
-            Element("output1").element.appendChild(outputdiv)
-            document.getElementById("myInput").style.display = "block"
+            if struct_data:
+                cols = [k for k in struct_data[0].keys()]
+                id = f"final differences"
+                outputdiv = construct_table(columns=cols, records=struct_data, id=id)
+                document.getElementById("output1").innerHTML = ""
+                document.getElementById("output2").innerHTML = ""
+                Element("output1").element.appendChild(outputdiv)
+                document.getElementById("myInput").style.display = "block"
+            else:
+                document.getElementById("output1").style.display = "none"
+                document.getElementById("output2").style.display = "none"
+                document.getElementById("output3").innerHTML = ""
+                document.getElementById("output3").style.color = "DarkGreen"
+                document.getElementById("output3").innerHTML = "NO DIFFERENCES DETECTED IN THE OUTPUTS"
 
 
 def construct_table(columns, records, id) -> None:
@@ -204,3 +209,4 @@ try:
 
 except Exception as x:
     print("Error starting the routing-table app: \n {}".format(x))
+    
